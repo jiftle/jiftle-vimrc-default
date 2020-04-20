@@ -1,6 +1,8 @@
 "设置编码,处理中文乱码,文件默认utf8编码
 set fileencodings=utf-8,ucs-bom,cp936,big5
 set encoding=utf-8
+" gvim或MacVim字体设置
+set guifont=DroidSansMono\ Nerd\ Font\ Mono\ 10
 
 " 不兼容vi，避免以前版本的bug和局限
 set nocompatible
@@ -166,40 +168,40 @@ call plug#end()
 " let g:UltiSnipsEditSplit="vertical"
 
 
-" --------------------- 解决YCM和UltiSnips键冲突的问题 ---------------                                                                                 
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" " --------------------- 解决YCM和UltiSnips键冲突的问题 ---------------                                                                                 
+" function! g:UltiSnips_Complete()
+"   call UltiSnips#ExpandSnippet()
+"   if g:ulti_expand_res == 0
+"     if pumvisible()
+"       return "\<C-n>"
+"     else
+"       call UltiSnips#JumpForwards()
+"       if g:ulti_jump_forwards_res == 0
+"         return "\<TAB>"
+"       endif
+"     endif
+"   endif
+"   return ""
+" endfunction
+" 
+" function! g:UltiSnips_Reverse()
+"   call UltiSnips#JumpBackwards()
+"   if g:ulti_jump_backwards_res == 0
+"     return "\<C-P>"
+"   endif
+" 
+"   return ""
+" endfunction
+" 
+" if !exists("g:UltiSnipsJumpForwardTrigger")
+"   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" endif
+" if !exists("g:UltiSnipsJumpBackwardTrigger")
+"   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" endif
+" 
+" 
+" 
+" au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+" au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
