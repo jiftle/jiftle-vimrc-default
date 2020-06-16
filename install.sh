@@ -1,7 +1,7 @@
 echo '--> start install .vimrc'
-cp .vimrc ~/
+cp vimrc ~/.vimrc
 echo 'copy .vimrc to user dir'
-cp -r .vim/ ~/
+cp -r vim/ ~/.vim
 echo '--> install successfully'
 
 
