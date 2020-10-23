@@ -1,3 +1,11 @@
+#!/bin/bash
+# -----------------------------------------------------------------
+# FileName: sh-vim-plug-update.sh
+# Date: 2020-10-23
+# Author: jiftle
+# Description: 
+# -----------------------------------------------------------------
+
 StatusCode=$(curl -I -m 10 -o /dev/null -s -w %{http_code}  https://raw.githubusercontent.com/)
 
 echo "  |--> 测试github网络状况，curl返回值=$StatusCode"
