@@ -9,19 +9,25 @@ vim的配置文件备份，办公室的，家里的，虚拟机的。。。每�
 
 ## 适用范围
 ---
-- 操作系统 linux, windows xp 以上
+- 操作系统
+    - Linux(Deepin, Ubuntu 18.04, centos 7)
+    - Windows(windows xp, Win7)
+    - MacOS
 
 ## 使用
 
 - 第一步 `git clone https://github.com/jiftle/vimrc.git'
-- 第二步 `cd vimrc`
+- 第二步 `cd vimrc/install/linux/`
 - 第三步 `sh install.sh`
 - 第四步 启动vim，命令模式执行`:PlugInstall`
 
 ## 扯淡
 ---
-deepin是适合工作的linux操作系统，最好用的没有之一。以后可能会使用更好用的linux版本吧。
-
+- deepin是适合工作的linux操作系统，最好用的没有之一。以后可能会使用更好用的linux版本吧。
+    - deepin 15.11  非常好的版本
+    - deepin V20    内核升级到5.4.9，文本编辑器可以使用emoji表情了，但是系统变慢了，不完美的升级
+- 远离Windows，远离广告，排除广告干扰，还你一个干净的世界
+- 垃圾360，广告机
 
 ## github仓库地址
 ---
@@ -32,6 +38,11 @@ deepin是适合工作的linux操作系统，最好用的没有之一。以后可
 ---
 - 只需要安装git客户端即可
 - curl 不需要
+
+## 注意事项
+
+- 自动完成插件，需要vim8.2及以上版本(浮动窗口特性)
+- 如果不具备，在.vimrc中禁用coc插件
 
 ## 常见问题
 ---
@@ -56,3 +67,5 @@ deepin是适合工作的linux操作系统，最好用的没有之一。以后可
     - vim.plug 插件管理器，从GitHub或GitEe自动更新，通过shell脚本实现
 - 2020-10-24
     - GitEe 脚本有问题，恢复为官方脚本
+    - 默认带有初始的脚本插件，不再需要再次更新
+    - Coc插件，在另外的目录还需要自己安装更新

@@ -5,16 +5,25 @@
 # Author: jiftle
 # Description: 
 # -----------------------------------------------------------------
+OsType=$(uname)
+cd ../..
 
-echo '--> start install .vimrc'
-cp vimrc ~/.vimrc
-echo 'copy .vimrc to user dir'
-cp -r vim/ ~/.vim
-echo '--> install successfully'
+echo "  |--> OS: $OsType"
+if [ "$OsType" == "Darwin" ]; then
+	echo "  |--> MacOS"
+	echo '  |--> start install .vimrc'
+	cp vimrc ~/.vimrc
 
-OsTye=$(uname)
+	echo '  |--> copy .vimrc to user dir'
+	cp -R vim/ ~/.vim
+	echo '--> install successfully'
+else
+	echo '--> start install .vimrc'
+	cp vimrc ~/.vimrc
+	echo 'copy .vimrc to user dir'
+	cp -r vim/ ~/.vim
+	echo '--> install successfully'
 
-if [ $OsType <> "Darwin" ]; then
 	# 安装Nerd字体，解决状态栏图标显示乱码问题
 
 	# 新建字体目录 

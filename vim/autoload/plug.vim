@@ -92,7 +92,7 @@ let g:loaded_plug = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
-let s:plug_src = 'https://gitee.com/yaozhijin/vim-plug.git'
+let s:plug_src = 'https://github.com/junegunn/vim-plug.git'
 let s:plug_tab = get(s:, 'plug_tab', -1)
 let s:plug_buf = get(s:, 'plug_buf', -1)
 let s:mac_gui = has('gui_macvim') && has('gui_running')
@@ -769,7 +769,7 @@ function! s:infer_properties(name, repo)
       if repo !~ '/'
         throw printf('Invalid argument: %s (implicit `vim-scripts'' expansion is deprecated)', repo)
       endif
-      let fmt = get(g:, 'plug_url_format', 'https://git::@gitee.com/%s.git')
+      let fmt = get(g:, 'plug_url_format', 'https://git::@github.com/%s.git')
       let uri = printf(fmt, repo)
     endif
     return { 'dir': s:dirpath(g:plug_home.'/'.a:name), 'uri': uri }
@@ -804,7 +804,7 @@ function! s:syntax()
   syn match plugNumber /[0-9]\+[0-9.]*/ contained
   syn match plugBracket /[[\]]/ contained
   syn match plugX /x/ contained
-  syn match plugDash /^-/
+  syn match plugDash /^-\{1}\ /
   syn match plugPlus /^+/
   syn match plugStar /^*/
   syn match plugMessage /\(^- \)\@<=.*/
@@ -822,6 +822,7 @@ function! s:syntax()
   syn match plugError /^x.*/
   syn region plugDeleted start=/^\~ .*/ end=/^\ze\S/
   syn match plugH2 /^.*:\n-\+$/
+  syn match plugH2 /^-\{2,}/
   syn keyword Function PlugInstall PlugStatus PlugUpdate PlugClean
   hi def link plug1       Title
   hi def link plug2       Repeat
@@ -1078,7 +1079,7 @@ function! s:checkout(spec)
   let output = s:git_revision(a:spec.dir)
   if !empty(output) && !s:hash_match(sha, s:lines(output)[0])
     let output = s:system(
-          \ 'git fetch --depth 999999 && git checkout '.plug#shellescape(sha).' --', a:spec.dir)
+          \ 'git -c credential.helper= fetch --depth 999999 && git checkout '.plug#shellescape(sha).' --', a:spec.dir)
   endif
   return output
 endfunction
@@ -1846,7 +1847,7 @@ class Plugin(object):
       self.write(Action.UPDATE, self.name, ['Updating ...'])
       callback = functools.partial(self.write, Action.UPDATE, self.name)
       fetch_opt = '--depth 99999999' if self.tag and os.path.isfile(os.path.join(self.args['dir'], '.git/shallow')) else ''
-      cmd = 'git fetch {0} {1} 2>&1'.format(fetch_opt, G_PROGRESS)
+      cmd = 'git -c credential.helper= fetch {0} {1} 2>&1'.format(fetch_opt, G_PROGRESS)
       com = Command(cmd, self.args['dir'], G_TIMEOUT, callback)
       result = com.execute(G_RETRIES)
       self.write(Action.DONE, self.name, result[-1:])
@@ -2154,7 +2155,7 @@ function! s:update_ruby()
                 if pull
                   log.call name, 'Updating ...', :update
                   fetch_opt = (tag && File.exist?(File.join(dir, '.git/shallow'))) ? '--depth 99999999' : ''
-                  bt.call "#{chdir} && git fetch #{fetch_opt} #{progress} 2>&1", name, :update, nil
+                  bt.call "#{chdir} && git -c credential.helper= fetch #{fetch_opt} #{progress} 2>&1", name, :update, nil
                 else
                   [true, skip]
                 end
@@ -2784,3 +2785,4 @@ endif
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
+
