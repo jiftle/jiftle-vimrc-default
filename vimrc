@@ -55,9 +55,9 @@ Plug 'ryanoasis/vim-devicons'
 " ------------- 模糊搜索 --------------
 " 全局搜索某个单词，ubuntu需要在机器上安装`apt-get install ack-grep
 Plug 'mileszs/ack.vim'
-" 搜索插件
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" 搜索插件  ---------- 不经常用，禁用
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
 " ==================== 主题配色 ====================
 Plug 'morhetz/gruvbox'
@@ -82,7 +82,6 @@ Plug 'joshdick/onedark.vim'
 " 
 " " ====================== golang 开发支持 ======================
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'dgryski/vim-godef', { 'for' : 'go' }
 " 
 " 
 " " ====================== TypeScript 开发支持 ======================
